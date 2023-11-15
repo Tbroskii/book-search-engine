@@ -46,4 +46,16 @@ class AuthService {
   }
 }
 
+/ Modify your authentication middleware to work with GraphQL
+const authenticate = (req, res, next) => {
+  // Your authentication logic here
+  const token = req.headers.authorization || '';
+  // Validate and set user information
+  req.user = validateToken(token);
+  next();
+};
+
+app.use(authenticate);
+
+
 export default new AuthService();
